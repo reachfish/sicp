@@ -1,3 +1,5 @@
+#--------------------------------------------------------------
+# pair
 def cons(a, b):
     return lambda pick: (a,b)[pick]
 
@@ -7,6 +9,11 @@ def car(x):
 def cdr(x):
     return x(1)
 
+def cons_str(x):
+    return "[%s, %s]" %(str(car(x)), str(cdr(x)))
+
+#--------------------------------------------------------------
+# slist
 def slist(*args):
     if len(args) == 0:
         return None
@@ -32,6 +39,9 @@ def slist_map(ls, f):
 
     return cons(f(car(ls)), slist_map(cdr(ls), f))
 
+def slist_scale(ls, s):
+    return slist_map(ls, lambda x: x * s)
+
 def slist_str(ls):
     t = [] 
     def f(x):
@@ -41,6 +51,7 @@ def slist_str(ls):
 
     return '[%s]' % (','.join(t))
 
+#--------------------------------------------------------------
 
 if __name__ == "__main__":
     ls = slist(10, 20, 30, 40)
